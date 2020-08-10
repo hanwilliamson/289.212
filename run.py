@@ -1,42 +1,68 @@
-from flask import Flask, render_template, g
+from flask import Flask, render_template, g, request
 import sqlite3
 
 app = Flask(__name__)
 MENUDB = 'menu.db'
 
-@app.route('/')
-def index():
+def fetchMenu(con):
     burgers = []
-    db = sqlite3.connect(MENUDB)
-    print(db)
-    cur = db.execute('SELECT burger,price FROM burgers')
+    free = '0'
+    cur = con.execute('SELECT burger,price FROM burgers')
     for row in cur:
         burgers.append(list(row))
 
     drinks = []
-    db = sqlite3.connect(MENUDB)
-    print(db)
-    cur = db.execute('SELECT drink,price FROM drinks')
+    cur = con.execute('SELECT drink,price FROM drinks')
     for row in cur:
         drinks.append(list(row))
 
     sides = []
-    db = sqlite3.connect(MENUDB)
-    print(db)
-    cur = db.execute('SELECT side,price FROM sides')
+    cur = con.execute('SELECT side,price FROM sides')
     for row in cur:
         sides.append(list(row))
 
+    return {'burgers':burgers, 'drinks':drinks, 'sides':sides}
 
-    db.close()
+@app.route('/')
+def index():
+    con = sqlite3.connect(MENUDB)
+    menu = fetchMenu(con)
+    con.close()
 
     return render_template('index.html',
                             disclaimer='may contain traces of nuts',
-                            burgers=burgers,
-                            drinks=drinks,
-                            sides=sides
+                            burgers=menu['burgers'],
+                            drinks=menu['drinks'],
+                            sides=menu['sides']
                             )
 
 @app.route('/order')
 def order():
-    return render_template('order.html')
+    con = sqlite3.connect(MENUDB)
+    menu = fetchMenu(con)
+    con.close()
+
+    return render_template('order.html',
+                            disclaimer='may contain traces of nuts',
+                            burgers=menu['burgers'],
+                            drinks=menu['drinks'],
+                            sides=menu['sides']
+                            )
+
+@app.route('/confirm', methods=['POST'])
+def confirm():
+    details = {}
+    items = {}
+
+    for input in request.form:
+        if input == 'name' or input == 'address':
+            details[input] = request.form[input]
+        elif request.form[input] and request.form[input] != 0:
+            items[input] = request.form[input]
+
+    con = sqlite3.connect[MENUDB]
+
+    return render_template('confirm.html',
+                            details=details,
+                            items=items
+                            )

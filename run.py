@@ -30,7 +30,7 @@ def index():
     con.close()
 
     return render_template('index.html',
-                            disclaimer='may contain traces of nuts',
+                            footer= '© Hannah Williamson 2020',
                             burgers=menu['burgers'],
                             drinks=menu['drinks'],
                             sides=menu['sides']
@@ -43,7 +43,7 @@ def order():
     con.close()
 
     return render_template('order.html',
-                            disclaimer='may contain traces of nuts',
+                            footer= '© Hannah Williamson 2020',
                             burgers=menu['burgers'],
                             drinks=menu['drinks'],
                             sides=menu['sides']

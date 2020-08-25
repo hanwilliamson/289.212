@@ -1,20 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}212 Burgers{% endblock %}
+{% block title %}Astrology & a half{% endblock %}
 
 {% block content %}
   <div id="header">
 
-    <img src="{{ url_for('static', filename='logo.svg') }}" id="logo" />
-    <h1>Welcome!</h1>
-    <em>BURGERS &bull; DRINKS &bull; FRIES</em>
+    <img src="{{ url_for('static', filename='logo.png') }}" id="logo" />
+    <br>
+    <p id="welcome">Welcome to <i>astrology & a half</i> - a place to learn more about your star sign.</p>
     <p>
-      <a class="btn-yellow" href="{{ url_for('order') }}">order now</a>
+      <br>
+      <a class="btn-yellow" href="{{ url_for('order') }}">learn more</a>
     </p>
 
   </div>
 
-  <div id="menu">
+  <!-- <div id="menu">
 
     <h1>Menu</h1>
 
@@ -45,5 +46,5 @@
       </ul>
     </div>
 
-  </div>
+  </div> -->
 {% endblock %}

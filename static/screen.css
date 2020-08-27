@@ -33,6 +33,7 @@ h1 {
   font-family: "Courier New", Courier, monospace;
   font-size: 3em;
   margin: 0;
+  text-align: center;
 }
 
 h2 {
@@ -48,6 +49,11 @@ a {
 
 p {
   color: #331a00;
+  text-align: center;
+}
+
+ul {
+  list-style: none;
 }
 
 /* id selector (one-off items) */
@@ -73,7 +79,7 @@ p {
   text-align: center;
 }
 
-#menu {
+#signselection {
   /*background-color: white;
   background-image: url(menu-bg.svg);
   background-size: 46px;*/
@@ -97,6 +103,21 @@ p {
   font-weight: normal;
 }
 
+#signimg {
+  width: 100%;
+  max-width: 420px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#list {
+  max-width: 100%;
+}
+
+#submitbutton {
+  ftext-align: right;
+}
 /* class selector (multiple instances) */
 
 .menu-items {
@@ -125,6 +146,13 @@ p {
 }
 
 .center-text {
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-content: center;
   text-align: center;
 }
 
@@ -171,7 +199,7 @@ input, textarea {
   border: solid 2px #331a00;
   border-radius: 3px;
   color: #331a00;
-  font-family: 'Monda', sans-serif;
+  font-family: "Courier New", Courier, monospace;
   font-size: 0.8em;
   height: 2em;
   padding: 0 0.5em;
@@ -183,7 +211,7 @@ textarea {
 }
 
 #menu input, #menu textarea {
-  float: left;
+  /*float: left;*/
   margin-right: 1em;
   margin-top: -0.15em;
   width: 2.2em;

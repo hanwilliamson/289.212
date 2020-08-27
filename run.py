@@ -2,67 +2,67 @@ from flask import Flask, render_template, g, request
 import sqlite3
 
 app = Flask(__name__)
-MENUDB = 'menu.db'
+STARSIGNSDB = 'starsigns.db'
 
 def fetchMenu(con):
-    burgers = []
-    free = '0'
-    cur = con.execute('SELECT burger,price FROM burgers')
+    signs = []
+    cur = con.execute('SELECT name FROM signs')
     for row in cur:
-        burgers.append(list(row))
+        signs.append(list(row))
 
-    drinks = []
-    cur = con.execute('SELECT drink,price FROM drinks')
-    for row in cur:
-        drinks.append(list(row))
-
-    sides = []
-    cur = con.execute('SELECT side,price FROM sides')
-    for row in cur:
-        sides.append(list(row))
-
-    return {'burgers':burgers, 'drinks':drinks, 'sides':sides}
+    return {'signs':signs}
 
 @app.route('/')
 def index():
-    con = sqlite3.connect(MENUDB)
+    con = sqlite3.connect(STARSIGNSDB)
     menu = fetchMenu(con)
     con.close()
 
     return render_template('index.html',
                             footer= '© Hannah Williamson 2020',
-                            burgers=menu['burgers'],
-                            drinks=menu['drinks'],
-                            sides=menu['sides']
+                            signs=menu['signs']
                             )
 
 @app.route('/order')
 def order():
-    con = sqlite3.connect(MENUDB)
+    con = sqlite3.connect(STARSIGNSDB)
     menu = fetchMenu(con)
     con.close()
 
+    #cur = con.execute('SELECT name FROM signs')
+    #for row in cur:
+        #signs.append(list(row))
+
     return render_template('order.html',
                             footer= '© Hannah Williamson 2020',
-                            burgers=menu['burgers'],
-                            drinks=menu['drinks'],
-                            sides=menu['sides']
+                            signs=menu['signs']
                             )
 
-@app.route('/confirm', methods=['POST'])
-def confirm():
-    details = {}
-    items = {}
+
+@app.route('/result', methods=['POST'])
+def result():
+    # con = sqlite3.connect(STARSIGNSDB)
+    # menu = fetchMenu(con)
+    #
+    # signs = []
+    # cur = con.execute('SELECT name, image, ruling_planet, description, good_quality, bad_quality, lucky_number FROM signs')
+    # for row in cur:
+    #     signs.append(list(row))
+
+    sign = {}
+
 
     for input in request.form:
-        if input == 'name' or input == 'address':
-            details[input] = request.form[input]
-        elif request.form[input] and request.form[input] != 0:
-            items[input] = request.form[input]
+        if input == '':
+            return render_template('order.html',
+                             footer= '© Hannah Williamson 2020',
+                             signs=menu['signs']
+                             )
+        else:
+            sign[input] = request.form[input]
 
-    con = sqlite3.connect[MENUDB]
 
-    return render_template('confirm.html',
-                            details=details,
-                            items=items
+    return render_template('result.html',
+                            footer= '© Hannah Williamson 2020',
+                            #signs=menu['signs']
                             )

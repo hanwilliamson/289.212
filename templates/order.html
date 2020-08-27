@@ -18,10 +18,46 @@
     <p>If you're unsure, use <a href="https://www.horoscopedates.com/star-sign/"><b>this</b></a> calculator to find out which sign you are.</p>
   </div>
 
-  <form action="/confirm" method="post">
-    <div id="menu">
+    <form action="/result" method="post">
+      <div id="signselection">
+        <!--<div id="list">
+          <ul>
+            {% for name in signs %}
+            <li>
+              <input type="radio" name="{{ signs[0] }}"><span>{{ signs[0] }}</span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <br>-->
 
-      <div>
+        <input type="radio" id="1" name="sign" value="aries">
+        <label for="aries">Aries</label><br>
+        <input type="radio" id="2" name="sign" value="taurus">
+        <label for="taurus">Taurus</label><br>
+        <input type="radio" id="3" name="sign" value="gemini">
+        <label for="gemini">Gemini</label><br>
+        <input type="radio" id="4" name="sign" value="cancer">
+        <label for="cancer">Cancer</label><br>
+        <input type="radio" id="5" name="sign" value="leo">
+        <label for="leo">Leo</label><br>
+        <input type="radio" id="6" name="sign" value="virgo">
+        <label for="virgo">Virgo</label><br>
+        <input type="radio" id="7" name="sign" value="Libra">
+        <label for="libra">Libra</label><br>
+        <input type="radio" id="8" name="sign" value="scorpio">
+        <label for="scorpio">Scorpio</label><br>
+        <input type="radio" id="9" name="sign" value="sagittarius">
+        <label for="sagittarius">Sagittarius</label><br>
+        <input type="radio" id="10" name="sign" value="capricorn">
+        <label for="capricorn">Capricorn</label><br>
+        <input type="radio" id="11" name="sign" value="aquarius">
+        <label for="aquarius">Aquarius</label><br>
+        <input type="radio" id="12" name="sign" value="pisces">
+        <label for="pisces">Pisces</label>
+        <br>
+
+      <!--<div>
         <ol class="menu-items">
           {% for burger in burgers %}
           <li>
@@ -43,8 +79,8 @@
         <label for="address">Address and delivery instructions:</label>
         <textarea id="address"name="address"rows="6"required>
         </textarea>
-      </p>
-      <input type="submit"value="order"class="btn-yellow" />
+      </p> -->
+      <input type="submit" value="submit" class="btn-yellow" id="submitbutton"/>
     </div>
   </form>
 {% endblock %}
